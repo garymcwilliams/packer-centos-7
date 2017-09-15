@@ -1,0 +1,43 @@
+#!/usr/bin/env bash
+#
+# export GROUP="com.lagan.lagancas"
+# export ARTIFACTID="lagancas"
+# export FILE="$WORKSPACE/dist/lagancas.zip"
+# export PACKAGING=zip
+#
+# to download a SNAPSHOT, use url such as:
+# http://bfs-pdt-nexus-1.kana-test.com:8081/nexus/service/local/artifact/maven/redirect?r=lagan-snapshots&g=$GROUP&a=$ARTIFACT&p=$PACKAGING&v=LATEST
+# e.g.
+# http://bfs-pdt-nexus-1.kana-test.com:8081/nexus/service/local/artifact/maven/redirect?r=lagan-snapshots&g=com.lagan.lagancentre&a=bundle&p=zip&v=LATEST
+#
+# to download a RELEASE, use url such as:
+# http://bfs-pdt-nexus-1.kana-test.com:8081/nexus/service/local/artifact/maven/redirect?r=lagan-releases&g=$GROUP&a=$ARTIFACT&p=$PACKAGING&v=$RELEASE
+# NOTE that RELEASE can be an actual release or 'LATEST' to get the latest one
+# e.g.
+# http://bfs-pdt-nexus-1.kana-test.com:8081/nexus/service/local/artifact/maven/redirect?r=lagan-releases&g=com.lagan.lagancas&a=laganicas&p=zip&v=LATEST
+
+RELEASE="0.0.2"
+GROUP="com.verint.vagrant-le"
+ARTIFACTID="virtualbox-verint-le-centos7"
+FILE=builds/virtualbox-verint-le-centos7.box
+PACKAGING=box
+
+if [[ "$RELEASE" == *-SNAPSHOT ]]
+then
+    echo "Deploying snapshot"
+    repo=snapshots
+else
+    echo "Deploying release"
+    repo=releases
+fi
+
+mvn deploy:deploy-file \
+  -Dversion=$RELEASE \
+  -Durl=http://bfs-pdt-nexus-1.kana-test.com:8081/nexus/content/repositories/lagan-$repo/ \
+  -Dfile=$FILE \
+  -DgroupId=$GROUP \
+  -Dpackaging=$PACKAGING \
+  -DgeneratePom=true \
+  -DrepositoryId=nexus.belfast \
+  -DartifactId=$ARTIFACTID
+
