@@ -62,12 +62,37 @@
       ]
     },
     {
+      "type": "hyperv-iso",
+      "vm_name": "packer-centos-7-x86_64",
+	  "guest_additions_mode": "disable",
+      "http_directory": "http",
+      "boot_wait": "10s",
+      "boot_command": [
+        "<tab> text ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/ks.cfg<enter><wait>"
+      ],
+      "disk_size": 122820,
+      "iso_urls": [
+        "CentOS-7-x86_64-Minimal-1611.iso",
+        "http://ftp.wrz.de/pub/CentOS/7/isos/x86_64/CentOS-7-x86_64-Minimal-1611.iso"
+      ],
+      "iso_checksum_type": "sha256",
+      "iso_checksum": "27bd866242ee058b7a5754e83d8ee8403e216b93d130d800852a96f41c34d86a",
+	  "communicator":"ssh",
+      "ssh_username": "vagrant",
+      "ssh_password": "vagrant",
+      "ssh_port": 22,
+	  "ssh_timeout": "20m",
+      "shutdown_command": "echo 'vagrant'|sudo -S /sbin/halt -h -p",
+	  "generation": 1,
+	  "switch_name":"Intel External"
+    },
+    {
       "type": "vmware-iso",
       "boot_command": [
         "<tab> text ks=http://{{ .HTTPIP }}:{{ .HTTPPort }}/ks.cfg<enter><wait>"
       ],
       "boot_wait": "10s",
-      "disk_size": 81920,
+      "disk_size": 101920,
       "guest_os_type": "centos-64",
       "headless": true,
       "http_directory": "http",

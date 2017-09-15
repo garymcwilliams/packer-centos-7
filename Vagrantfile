@@ -39,4 +39,15 @@ Vagrant.configure("2") do |config|
     config.vm.provision "shell", inline: "echo Hello, World"
   end
 
+  # Hyper-v
+  # `vagrant up virtualbox --provider=hyperv`
+  config.vm.define "hyperv" do |hyperv|
+    hyperv.vm.hostname = "hyperv-centos7"
+    hyperv.vm.box = "file://builds/hyperv-centos7.box"
+    hyperv.vm.network :private_network, ip: "192.168.3.2"
+	hyperv.differencing_disk = true
+
+    config.vm.provision "shell", inline: "echo Hello, World"
+  end
+
 end
