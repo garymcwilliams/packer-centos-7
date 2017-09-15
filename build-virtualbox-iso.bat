@@ -1,2 +1,2 @@
-packer build --only=virtualbox centos7.json
+packer build --only=virtualbox-iso centos7.json
 
