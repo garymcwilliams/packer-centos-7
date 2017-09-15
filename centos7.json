@@ -92,7 +92,7 @@
   ],
   "post-processors": [
     {
-      "output": "builds/{{.Provider}}-centos7.box",
+      "output": "builds/{{.Provider}}-verint-le-centos7.box",
       "type": "vagrant"
     }
   ]
