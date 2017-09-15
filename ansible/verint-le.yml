@@ -1,0 +1,17 @@
+---
+# vim: set filetype=ansible tabstop=2 shiftwidth=2 autoindent expandtab :
+
+- hosts: all
+  become: yes
+  gather_facts: yes
+
+  tasks:
+
+  - name: install verint-le packages
+    package:
+      name: "{{ item }}"
+      state: present
+    with_items:
+      - vim
+      - mlocate
+

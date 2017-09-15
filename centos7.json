@@ -11,6 +11,10 @@
       "galaxy_file": "requirements.yml"
     },
     {
+      "type": "ansible-local",
+      "playbook_file": "ansible/verint-le.yml"
+    },
+    {
       "type": "shell",
       "execute_command": "echo 'vagrant' | {{.Vars}} sudo -S -E bash '{{.Path}}'",
       "script": "scripts/cleanup.sh"
